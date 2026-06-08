@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hemvård</title>
+    <title>Self-check</title>
     <style>
         body {
             background-color: white;
@@ -15,14 +15,23 @@
             margin-bottom: 20px;
             font-size: 18px;
         }
-        .question {
+        h1 {
             font-size: 24px;
             margin-bottom: 30px;
+        }
+        .content {
+            margin-bottom: 30px;
+        }
+        .content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
         }
         .buttons {
             display: flex;
             justify-content: center;
             gap: 20px;
+            flex-wrap: wrap;
         }
         button {
             padding: 10px 20px;
@@ -33,14 +42,99 @@
 </head>
 <body>
     <div class="date-time" id="dateTime"></div>
-    <div class="question">Har du tagit hand om ditt hem?</div>
-    <div class="buttons">
-        <button onclick="window.location.href='1home_pos.html'">Ja</button>
-        <button onclick="window.location.href='1home_neg.html'">Nej</button>
-    </div>
+    <div id="step"></div>
 
     <script>
-        document.getElementById('dateTime').innerText = new Date().toLocaleString('sv-SE');
+        // ─── STEG-DEFINITION ────────────────────────────────────────────────────────
+        // Varje steg har:
+        //   title   – rubrik (valfritt)
+        //   content – fri HTML: text, bilder, vad som helst (valfritt)
+        //   buttons – array av { label, next } där next är ett steg-id
+        //
+        // Exempel med bild:
+        //   content: '<img src="bil.jpg" alt="Min bil"><p>Har du kört idag?</p>'
+        // ────────────────────────────────────────────────────────────────────────────
+
+        const steps = {
+            "home": {
+                title: "Har du tagit hand om ditt hem?",
+                buttons: [
+                    { label: "Ja",  next: "home-pos" },
+                    { label: "Nej", next: "home-neg" }
+                ]
+            },
+            "home-pos": {
+                title: "Bra jobbat!",
+                buttons: [
+                    { label: "Bra jobbat, nu vidare!", next: "health" }
+                ]
+            },
+            "home-neg": {
+                title: "Ta hand om ditt hem, är du klar nu?",
+                buttons: [
+                    { label: "Japp, nu är det fixat!", next: "health" },
+                    { label: "Nej, jag är lat",        next: "home-neg" }
+                ]
+            },
+            "health": {
+                title: "Har du putsat på din kropp?",
+                buttons: [
+                    { label: "Japp, jag ser ut som en vinnarhäst.", next: "health-pos" },
+                    { label: "Nej, jag ser ut som sju svåra år.",   next: "health-neg" }
+                ]
+            },
+            "health-pos": {
+                title: "OM JA",
+                buttons: [
+                    { label: "Tillbaka", next: "health" }
+                ]
+            },
+            "health-neg": {
+                title: "Ta hand om din hälsa, är du klar nu?",
+                buttons: [
+                    { label: "Tillbaka", next: "health" }
+                ]
+            }
+        };
+
+        // ─── ROUTER ─────────────────────────────────────────────────────────────────
+
+        function navigate(stepId) {
+            if (window.location.hash.slice(1) === stepId) {
+                render(); // redan på detta steg, re-rendera utan hashchange
+            } else {
+                window.location.hash = stepId;
+            }
+        }
+
+        function render() {
+            const id   = window.location.hash.slice(1) || "home";
+            const step = steps[id];
+
+            if (!step) {
+                document.getElementById("step").innerHTML =
+                    `<p>Okänt steg: <code>${id}</code></p>`;
+                return;
+            }
+
+            let html = "";
+            if (step.title)   html += `<h1>${step.title}</h1>`;
+            if (step.content)  html += `<div class="content">${step.content}</div>`;
+
+            html += '<div class="buttons">';
+            for (const btn of step.buttons) {
+                html += `<button onclick="navigate('${btn.next}')">${btn.label}</button>`;
+            }
+            html += "</div>";
+
+            document.getElementById("step").innerHTML = html;
+        }
+
+        document.getElementById("dateTime").innerText =
+            new Date().toLocaleString("sv-SE");
+
+        window.addEventListener("hashchange", render);
+        render();
     </script>
 </body>
 </html>
