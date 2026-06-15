@@ -8,7 +8,8 @@
       "Bash(cd /tmp)",
       "Bash(mkdir -p shots)",
       "Bash(\"/c/Program Files/Google/Chrome/Application/chrome.exe\" --headless=new --disable-gpu --screenshot=/tmp/shots/2health.png --window-size=800,600 \"http://localhost:8000/2health.html\")",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(pkill -f \"http.server 8000\")"
     ]
   }
 }
