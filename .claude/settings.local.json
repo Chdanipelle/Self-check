@@ -4,7 +4,11 @@
       "PowerShell(Rename-Item \"f:\\\\- g a t e\\\\- temp\\\\- c o d e\\\\Self-check\\\\hem_neg.html\" \"home_neg.html\")",
       "PowerShell(Rename-Item \"f:\\\\- g a t e\\\\- temp\\\\- c o d e\\\\Self-check\\\\hem_pos.html\" \"home_pos.html\")",
       "Skill(run)",
-      "Skill(run:*)"
+      "Skill(run:*)",
+      "Bash(cd /tmp)",
+      "Bash(mkdir -p shots)",
+      "Bash(\"/c/Program Files/Google/Chrome/Application/chrome.exe\" --headless=new --disable-gpu --screenshot=/tmp/shots/2health.png --window-size=800,600 \"http://localhost:8000/2health.html\")",
+      "Read(//tmp/**)"
     ]
   }
 }
