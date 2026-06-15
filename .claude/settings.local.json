@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "PowerShell(Rename-Item \"f:\\\\- g a t e\\\\- temp\\\\- c o d e\\\\Self-check\\\\hem_neg.html\" \"home_neg.html\")",
-      "PowerShell(Rename-Item \"f:\\\\- g a t e\\\\- temp\\\\- c o d e\\\\Self-check\\\\hem_pos.html\" \"home_pos.html\")"
+      "PowerShell(Rename-Item \"f:\\\\- g a t e\\\\- temp\\\\- c o d e\\\\Self-check\\\\hem_pos.html\" \"home_pos.html\")",
+      "Skill(run)",
+      "Skill(run:*)"
     ]
   }
 }
