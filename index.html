@@ -79,20 +79,58 @@
             "health": {
                 title: "Har du putsat på din kropp?",
                 buttons: [
-                    { label: "Japp, jag ser ut som en vinnarhäst.", next: "health-pos" },
-                    { label: "Nej, jag ser ut som sju svåra år.",   next: "health-neg" }
+                    { label: "Yes! Jag ser ut som en riktig vinnarhäst!", next: "health-pos" },
+                    { label: "Nej, jag ser ut som sju svåra år.",         next: "health-neg" }
                 ]
             },
             "health-pos": {
-                title: "OM JA",
+                title: "Bra jobbat, din fantastiska vinnare!",
                 buttons: [
-                    { label: "Tillbaka", next: "health" }
+                    { label: "Rubba-dub-dub!", next: "exercise" }
                 ]
             },
             "health-neg": {
                 title: "Ta hand om din hälsa, är du klar nu?",
                 buttons: [
-                    { label: "Tillbaka", next: "health" }
+                    { label: "Jag är nu ack så tvålfager", next: "health" }
+                ]
+            },
+            "exercise": {
+                title: "Har du tränat?",
+                buttons: [
+                    { label: "Yes! Now I fear no man!",                  next: "exercise" },
+                    { label: "No! I am the personification of shame!",  next: "exercise-neg" }
+                ]
+            },
+            "exercise-neg": {
+                title: "Vad skulle Bruce Lee gjort?",
+                buttons: [
+                    { label: "I finally understand that the boards don't hit back", next: "exercise-pos" }
+                ]
+            },
+            "exercise-pos": {
+                title: "Kingen!",
+                buttons: [
+                    { label: "En vet!", next: "active" }
+                ]
+            },
+            "active": {
+                title: "Har du aktiverat dig?",
+                buttons: [
+                    { label: "1 kick 1 million times sensei!",                       next: "active-pos" },
+                    { label: "I have offended me, and I have offended my family!",  next: "active-neg" }
+                ]
+            },
+            "active-pos": {
+                title: "OM JA",
+                buttons: [
+                    { label: "Tillbaka", next: "active" }
+                ]
+            },
+            "active-neg": {
+                title: "OM NEJ",
+                buttons: [
+                    { label: "Tillbaka", next: "active" }
                 ]
             }
         };
